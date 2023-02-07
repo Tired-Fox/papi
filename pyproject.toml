@@ -1,0 +1,43 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "python_api_documenter"
+version = "0.1.0"
+description = "Document python api with ease of use and customizability"
+readme = "README.md"
+license = "MIT"
+authors = [
+    { name="Tired Fox", email="zboehm104@gmail.com"}
+]
+classifiers = [
+
+]
+requires-python = ">=3.8"
+dependencies = []
+
+[project.optional-dependencies]
+tests = []
+
+[project.urls]
+"Homepage" = ""
+"Website" = ""
+
+[project.scripts]
+pyapi = "python_api_documenter.__main__:documentation"
+
+[tool.black]
+line-length = 100
+target-version = ["py37"]
+skip-string-normalization = true
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.mypy]
+ignore_missing_imports = true
+warn_unreachable = true
+no_implicit_optional = true
+show_error_codes = true
