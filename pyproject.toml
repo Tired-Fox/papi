@@ -3,9 +3,9 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "python_api_documenter"
+name = "padi"
 version = "0.1.0"
-description = "Document python api with ease of use and customizability"
+description = "python analysis, documentation, and insight"
 readme = "README.md"
 license = "MIT"
 authors = [
@@ -15,7 +15,7 @@ classifiers = [
 
 ]
 requires-python = ">=3.8"
-dependencies = []
+dependencies = ["phml"]
 
 [project.optional-dependencies]
 tests = []
@@ -25,7 +25,7 @@ tests = []
 "Website" = ""
 
 [project.scripts]
-pyapi = "python_api_documenter.__main__:documentation"
+padi = "padi.__main__:documentation"
 
 [tool.black]
 line-length = 100

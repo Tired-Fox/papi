@@ -1,0 +1,14 @@
+<footer>
+    <p>{project}</p>
+    <p>{f'v{version}' if not blank(version) else ""}</p>
+</footer>
+<style>
+    footer {
+        width: 100%;
+        display: flex;
+        padding: 1rem;
+        margin-top: 1rem;
+        gap: 1rem;
+        justify-content: center;
+    }
+</style>

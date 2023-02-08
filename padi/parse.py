@@ -1,6 +1,7 @@
 import ast
 from pathlib import Path
-from .nodes import Module
+
+from .nodes.file_system import Module
 
 ignore_list = ["__main__.py"]
 

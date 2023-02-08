@@ -1,5 +1,8 @@
 from __future__ import annotations
 import ast
+from markdown import Markdown
+
+md = Markdown()
 
 __all__ = [
     "MISSING",
@@ -26,7 +29,38 @@ def get_value(default):
         return Annotation(default)
     if isinstance(default, (ast.List, ast.Tuple, ast.Set)):
         return Collection(default)
-    raise TypeError(f"Unkown default value: {default}")
+    if isinstance(default, ast.Attribute):
+        return Attribute(default)
+    return default
+
+class DocObject:
+    def __init__(self) -> None:
+        self._docstring = ""
+
+    @property
+    def type(self) -> str:
+        return self.__class__.__name__.lower()
+
+    @property
+    def docstring(self) -> str:
+        return self._docstring
+    
+    @docstring.setter
+    def docstring(self, content: str) -> str:
+        input("SETTING DOCSTRING")
+        content = content.strip().split("\n")
+        indents = [len(line) - len(line.lstrip()) for line in content[1:] if line.strip() != ""]
+        indent = 0
+        for i in indents:
+            if i > indent:
+                indent = i
+        
+        for i, line in enumerate(content[1:]):
+            offset = max(0, len(line) - len(line.lstrip()) - indent)
+            content[i+1] = ' ' * offset + line.lstrip()
+            
+        input("\n".join(content))
+        self._docstring = "\n".join(content)
 
 class Annotation:
     def __init__(self, annotation) -> None:
@@ -82,11 +116,23 @@ class Collection:
 {', '.join(elements)}\
 {self.brackets[1]}{self.trailing}"
 
-class Assign:
+class Attribute:
+    def __init__(self, attr: ast.Attribute) -> None:
+        self.name = get_value(attr.value)
+        self.attr = get_value(attr.attr)
+    
+    def __str__(self) -> str:
+        return f"{self.name}.{self.attr}"
+    
+    def __repr__(self) -> str:
+        return f"Attr({self.name}, attr: {self.attr})"
+
+class Assign(DocObject):
     def __init__(self, attr: ast.Assign) -> None:
+        super().__init__()
         self.name = attr.targets[0].id
         self.value = get_value(attr.value) if attr.value is not None else MISSING
-        self.docstring = ""
+        self._docstring = ""
         
     def __repr__(self) -> str:
         return f"Assign({self.name}, value: {self.value})"
@@ -99,13 +145,14 @@ class Assign:
         )
         return f"{self.name}{value}"
     
-class AnnAssign:
+class AnnAssign(DocObject):
     def __init__(self, attr: ast.AnnAssign) -> None:
+        super().__init__()
         self.name = attr.target.id
         self.annotation = Annotation(attr.annotation) if attr.annotation is not None else MISSING
         self.value = get_value(attr.value) if attr.value is not None else MISSING
         self.simple = bool(attr.simple)
-        self.docstring = ""
+        self._docstring = ""
         
     def __repr__(self) -> str:
         return f"Attr({self.name}, anno: {self.annotation}, value: {self.value})"
@@ -119,8 +166,9 @@ class AnnAssign:
         )
         return f"{self.name}{annotation}{value}"
 
-class Class:
+class Class(DocObject):
     def __init__(self, klass: ast.ClassDef) -> None:
+        super().__init__()
         self.attributes = []
         self.methods = []
         self.classes = []
@@ -174,13 +222,41 @@ class Argument:
     def __repr__(self) -> str:
         return f"Arg({self.name!r}, {self.annotation!r}, {self.default!r})"
 
-class Method:
+class Import(DocObject):
+    def __init__(self, _import: ast.Import | ast.ImportFrom) -> None:
+        super().__init__()
+        self.module = MISSING
+        self.names = []
+        self.level = -1 # 0 means absolute import / no `.`
+        
+        if isinstance(_import, ast.Import):
+            self.names = [name.name for name in _import.names]
+        elif isinstance(_import, ast.ImportFrom):
+            self.module = _import.module or MISSING
+            self.names = [name.name for name in _import.names]
+            self.level = _import.level
+            
+    @property
+    def is_relative(self) -> bool:
+        return self.level > 0
+
+    def __str__(self) -> str:
+        if self.level >= 0:
+            name = self.module if self.module != MISSING else ''
+            return f"from {'.'*self.level + name} import {', '.join(self.names)}"
+        return f"import {', '.join(self.names)}"
+    
+    def __repr__(self) -> str:
+        return  f"Import(from: {self.module!r}, names: [{f', '.join(self.names)}, lvl: {self.level}])"
+
+class Method(DocObject):
     args: list
     """Methods arguments"""
     
     def __init__(self, method: ast.FunctionDef) -> None:
+        super().__init__()
         self.name = method.name
-
+        self.decorators = [get_value(decorator) for decorator in method.decorator_list]
         (
             self.posonlyargs,
             self.args,
@@ -204,7 +280,6 @@ class Method:
         for arg, default in zip(reversed(self.kwonlyargs), kw_defaults):
             arg.default = default
 
-        self.docstring = ""
         if (
             len(method.body) > 0
             and isinstance(method.body[0], ast.Expr)
@@ -242,7 +317,12 @@ class Method:
             f"**{self.kwarg}" if self.kwarg != MISSING else ""
         ]
 
-        return f"def {self.name}({', '.join([arg for arg in args if arg != ''])}){return_anno}"
+        decorators = [f"@{decorator}" for decorator in self.decorators]
+        decorators = "\n".join(decorators) + "\n" if len(decorators) > 0 else ""
+        return f"{decorators}def {self.name}({', '.join([arg for arg in args if arg != ''])}){return_anno}"
+    
+    def __repr__(self) -> str:
+        return f"Method({self.name!r})"
     
     def __str__(self) -> str:
         return self.signature()

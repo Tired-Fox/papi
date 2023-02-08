@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>sample_module</title>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+            main {
+                display: flex;
+                width: 100%;
+            }
+
+            body {
+                width: 100%;
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+                margin: 0;
+                padding: 0;
+            }
+
+            body > main {
+                flex: 1;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h2>sample_module</h2>
+        </header>
+        <main>
+            <nav id="module-nav">
+                <div>
+                    <ul id="module-files">
+                        <li>
+                            <a href="/sample_module/core">core.py</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Private</h3>
+                    <ul>
+                        <li>
+                            <a href="#private-__version__">__version__</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div id="module-content">
+                <article>
+                    <article>
+                        <p>sample_module</p>
+<p>Parses and compiles your text into a sample</p>
+                    </article>
+                    <!-- <p>{module.docstring}</p> -->
+                </article>
+                <div>
+                    <h2>Private</h2>
+                    <ul class="no_style">
+                        <li>
+                            <div class="module-assign">
+                                <strong>__version__</strong>
+                                = 
+                                <span class="assign-str">'1.0.0'</span>
+                            </div>
+                            <style>
+                                .module-assign {
+                                    width: 100%;
+                                }
+
+                                .assign-str {
+                                    color: green;
+                                }
+
+                                .assign-int {
+                                    color: yellow;
+                                }
+
+                                .assign-bool-none {
+                                    color: purple;
+                                }
+
+                                .assign-value {
+                                    color: gray;
+                                }
+                            </style>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <style>
+                #module-content {
+                    flex: 3;
+                }
+
+                .no_style {
+                    list-style: none;
+                }
+
+                #module-nav {
+                    flex: 1;
+                    overflow: auto;
+                }
+
+                #module-files {
+                    list-style: none;
+                }
+            </style>
+        </main>
+        <footer>
+            <p>sample_module</p>
+            <p>v1</p>
+        </footer>
+        <style>
+            footer {
+                width: 100%;
+                display: flex;
+                padding: 1rem;
+                margin-top: 1rem;
+                gap: 1rem;
+                justify-content: center;
+            }
+
+            header {
+                width: 100%;
+                height: 4rem;
+                text-align: center;
+                overflow: auto;
+            }
+        </style>
+    </body>
+</html>

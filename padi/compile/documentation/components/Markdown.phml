@@ -1,0 +1,11 @@
+<python>
+    from markdown import Markdown
+
+    md = Markdown()
+    Props = {
+        "src": ""
+    }
+</python>
+<article>
+    {md.reset().convert(src)}
+</article>

@@ -2,6 +2,7 @@ import click
 
 from . import __version__
 from .parse import construct_module
+from .compile.documentation import build_docs
 
 @click.group(invoke_without_command=True)
 def cli(version: bool):
@@ -27,9 +28,7 @@ def documentation(module: str,  output: str, layouts: str, version: bool) -> dic
 
     root = construct_module(module)
     
-    for file in root.files():
-        input(file.objects)
-
+    build_docs(root, module, user_templates=layouts)
 
 if __name__ == "__main__":
     documentation()

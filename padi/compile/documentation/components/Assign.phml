@@ -1,0 +1,38 @@
+<python>
+    def get_color(value):
+        if isinstance(value, str):
+            return "assign-str"
+        if isinstance(value, int):
+            return "assign-int"
+        if value is None or isinstance(value, bool):
+            return "assign-bool-none"
+        return "assign-value"
+
+    Props = {
+        "data": None
+    }
+</python>
+<div class="module-assign">
+    <strong>{data.name}</strong> = <span :class="get_color(data.value)">{repr(data.value)}</span>
+</div>
+<style>
+    .module-assign {
+        width: 100%;
+    }
+
+    .assign-str {
+        color: green;
+    }
+
+    .assign-int {
+        color: yellow;
+    }
+
+    .assign-bool-none {
+        color: purple;
+    }
+
+    .assign-value {
+        color: gray;
+    }
+</style>

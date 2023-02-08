@@ -3,13 +3,15 @@
 Handles all high level logic. Like combining parsing and compiling to create
 build steps.
 """
-from .parsing.decor import decor
+from .parsing import decor
 
 __all__ = [
     "build"
 ]
 
-@decor
+_protected_var = 1
+
+@decor.decor
 def compile_source():
     """Used to create the sample output given [[sample_module.parsing.formats.AST]]
     using [[sample_module.parsing.formats.compile]]."""
