@@ -1,133 +1,75 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="/playground/example/docs/assets/highlight.css" />
+        <link rel="stylesheet" href="/playground/example/docs/assets/global.css" />
         <title>sample_module</title>
-        <style>
-            * {
-                box-sizing: border-box;
-            }
-            main {
-                display: flex;
-                width: 100%;
-            }
-
-            body {
-                width: 100%;
-                height: 100vh;
-                display: flex;
-                flex-direction: column;
-                margin: 0;
-                padding: 0;
-            }
-
-            body > main {
-                flex: 1;
-            }
-        </style>
     </head>
     <body>
-        <header>
-            <h2>sample_module</h2>
-        </header>
         <main>
+            <header>
+                <a href="">
+                    <h4>sample_module</h4>
+                </a>
+                <input type="text" placeholder="search" />
+            </header>
             <nav id="module-nav">
-                <div>
+                <div id="module-file-nav">
                     <ul id="module-files">
                         <li>
-                            <a href="/sample_module/core">core.py</a>
+                            <a href="">core.py</a>
+                        </li>
+                        <li>
+                            <a href="../parsing/">parsing</a>
                         </li>
                     </ul>
                 </div>
-                <div>
-                    <h3>Private</h3>
+                <div scope="Private" objects="[Assign(__version__, value: 1.0.0)]" id="file-private">
+                    <strong>Private</strong>
                     <ul>
                         <li>
                             <a href="#private-__version__">__version__</a>
                         </li>
                     </ul>
                 </div>
+                <style>
+                    #module-file-nav {
+                        margin-top: 1rem;
+                    }
+                </style>
             </nav>
             <div id="module-content">
                 <article>
-                    <article>
-                        <p>sample_module</p>
-<p>Parses and compiles your text into a sample</p>
-                    </article>
-                    <!-- <p>{module.docstring}</p> -->
+                    <article src="Parses and compiles your text into a sample"><p>Parses and compiles your text into a sample</p></article>
                 </article>
-                <div>
-                    <h2>Private</h2>
-                    <ul class="no_style">
+                <div scope="Private" objects="[Assign(__version__, value: 1.0.0)]">
+                    <h3>Private</h3>
+                    <ul>
                         <li>
-                            <div class="module-assign">
-                                <strong>__version__</strong>
-                                = 
-                                <span class="assign-str">'1.0.0'</span>
+                            <div data="__version__ = '1.0.0'" scope="private" id="private-__version__" class="module-assign">
+                                <div class="module-object-header">
+                                    <a scope="private" name="__version__" href="#private-__version__" title="private variable: __version__">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="module-symbol module-symbol-assign">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5l-3.9 19.5m-2.1-19.5l-3.9 19.5" />
+                                        </svg>
+                                    </a>
+                                    <div class="codehilite">
+<pre><span></span><code><span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;1.0.0&#39;</span>
+</code></pre>
+</div>
+                                </div>
+                                <div class="docstring">
+                                    <article src="The version of the application"><p>The version of the application</p></article>
+                                </div>
                             </div>
-                            <style>
-                                .module-assign {
-                                    width: 100%;
-                                }
-
-                                .assign-str {
-                                    color: green;
-                                }
-
-                                .assign-int {
-                                    color: yellow;
-                                }
-
-                                .assign-bool-none {
-                                    color: purple;
-                                }
-
-                                .assign-value {
-                                    color: gray;
-                                }
-                            </style>
                         </li>
                     </ul>
                 </div>
             </div>
-            <style>
-                #module-content {
-                    flex: 3;
-                }
-
-                .no_style {
-                    list-style: none;
-                }
-
-                #module-nav {
-                    flex: 1;
-                    overflow: auto;
-                }
-
-                #module-files {
-                    list-style: none;
-                }
-            </style>
+            <footer>
+                <p>sample_module</p>
+                <p>v1</p>
+            </footer>
         </main>
-        <footer>
-            <p>sample_module</p>
-            <p>v1</p>
-        </footer>
-        <style>
-            footer {
-                width: 100%;
-                display: flex;
-                padding: 1rem;
-                margin-top: 1rem;
-                gap: 1rem;
-                justify-content: center;
-            }
-
-            header {
-                width: 100%;
-                height: 4rem;
-                text-align: center;
-                overflow: auto;
-            }
-        </style>
     </body>
 </html>

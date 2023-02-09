@@ -22,6 +22,7 @@ class File:
         self.path = path if isinstance(path, Path) else Path(path)
         self.full_path = full_path if isinstance(full_path, Path) else Path(full_path)
         self._docstring = ""
+        self.parent: Module | None = None
         if not self.full_path.is_file():
             raise TypeError(f"{self.path.as_posix()!r} is not a file.")
         
@@ -54,11 +55,24 @@ class File:
     
     @property
     def name(self) -> str:
+        if self.file_name == "__init__.py" and self.parent is not  None:
+            return self.parent.name
         return self.path.name.replace(self.path.suffix, "")
 
     @cached_property
     def parents(self) -> list[str]:
         return [path for path in self.path.as_posix().split("/")[:-1] if path.strip() != ""]
+
+    @cached_property
+    def url_path(self) -> list[str]:
+        parts = [
+                    path 
+                    for path in self.full_path.as_posix().split("/")[:-1]
+                    if path.strip() != ""
+                ][1:]
+        if self.parent is not None and self.name != self.parent.name:
+            parts.append(self.name)
+        return '/'.join(parts)
     
     @cached_property
     def source(self) -> str:
@@ -85,7 +99,6 @@ class File:
                 objects.append(AnnAssign(elem))
                 previous = "assign"
             elif isinstance(elem, ast.Expr) and previous == "assign" and isinstance(elem.value.value, str):
-                input("ASSIGN DOCSTRING")
                 objects[-1].docstring = elem.value.value
                 previous = "expr"
             else:
@@ -132,9 +145,10 @@ class File:
         return self.pretty()
 
 class Module:
-    def __init__(self, name: str, path: str) -> None:
+    def __init__(self, name: str, path: str, parent: Module | None = None) -> None:
         self.name = name
         self.path = Path(str(path).replace("\\", "/").strip("/"))
+        self.parent = parent
         self.nested: OrderedDict[str, Module|File] = OrderedDict()
     
     def __iter__(self):
@@ -155,9 +169,10 @@ class Module:
         current = self
         for parent in file.parents:
             if parent not in self.nested:
-                self.nested[parent] = Module(parent, self.path.joinpath(parent))
+                self.nested[parent] = Module(parent, self.path.joinpath(parent), current)
             current = self.nested[parent]
         if file.file_name not in current.nested:
+            file.parent = current
             current.nested[file.file_name] = file
 
     def files(self) -> Iterator[File]:

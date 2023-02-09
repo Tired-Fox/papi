@@ -1,38 +1,16 @@
 <python>
-    def get_color(value):
-        if isinstance(value, str):
-            return "assign-str"
-        if isinstance(value, int):
-            return "assign-int"
-        if value is None or isinstance(value, bool):
-            return "assign-bool-none"
-        return "assign-value"
-
     Props = {
-        "data": None
+        "data": None,
+        "scope": "public"
     }
 </python>
-<div class="module-assign">
-    <strong>{data.name}</strong> = <span :class="get_color(data.value)">{repr(data.value)}</span>
+<div id="{scope}-{data.name}" class="module-assign">
+    <div class="module-object-header">
+        <Symbol.Variable :scope="scope" :name="data.name" />
+        {code_highlight(data.code)}
+    </div>
+    
+    <div @if="not blank(data.docstring)" class="docstring">
+        <Markdown :src="data.docstring" />
+    </div>
 </div>
-<style>
-    .module-assign {
-        width: 100%;
-    }
-
-    .assign-str {
-        color: green;
-    }
-
-    .assign-int {
-        color: yellow;
-    }
-
-    .assign-bool-none {
-        color: purple;
-    }
-
-    .assign-value {
-        color: gray;
-    }
-</style>

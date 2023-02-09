@@ -1,8 +1,8 @@
 from __future__ import annotations
 import ast
-from markdown import Markdown
+from markdown2 import Markdown
 
-md = Markdown()
+md = Markdown(extras=["smarty-pants", "strike", "fenced-code-blocks"])
 
 __all__ = [
     "MISSING",
@@ -45,9 +45,12 @@ class DocObject:
     def docstring(self) -> str:
         return self._docstring
     
+    @property
+    def code(self) -> str:
+        return "None"
+    
     @docstring.setter
     def docstring(self, content: str) -> str:
-        input("SETTING DOCSTRING")
         content = content.strip().split("\n")
         indents = [len(line) - len(line.lstrip()) for line in content[1:] if line.strip() != ""]
         indent = 0
@@ -58,8 +61,7 @@ class DocObject:
         for i, line in enumerate(content[1:]):
             offset = max(0, len(line) - len(line.lstrip()) - indent)
             content[i+1] = ' ' * offset + line.lstrip()
-            
-        input("\n".join(content))
+
         self._docstring = "\n".join(content)
 
 class Annotation:
@@ -133,6 +135,14 @@ class Assign(DocObject):
         self.name = attr.targets[0].id
         self.value = get_value(attr.value) if attr.value is not None else MISSING
         self._docstring = ""
+    
+    @property
+    def code(self) -> str:
+        value = self.value
+        if isinstance(self.value, str):
+            value = repr(self.value)
+        
+        return f"{self.name} = {value}"
         
     def __repr__(self) -> str:
         return f"Assign({self.name}, value: {self.value})"
@@ -153,6 +163,14 @@ class AnnAssign(DocObject):
         self.value = get_value(attr.value) if attr.value is not None else MISSING
         self.simple = bool(attr.simple)
         self._docstring = ""
+
+    @property
+    def code(self) -> str:
+        value = self.value
+        if isinstance(self.value, str):
+            value = repr(self.value)
+        
+        return f"{self.name}: {self.annotation} = {value}"
         
     def __repr__(self) -> str:
         return f"Attr({self.name}, anno: {self.annotation}, value: {self.value})"
@@ -175,6 +193,10 @@ class Class(DocObject):
         self.bases = []
         self.name = klass.name
         previous = ""
+        
+        if len(klass.body) > 0 and isinstance(klass.body[0], ast.Expr) and isinstance(klass.body[0].value.value, str):
+            self._docstring = klass.body[0].value.value
+        
         for node in klass.body:
             if isinstance(node, ast.AnnAssign):
                 self.attributes.append(AnnAssign(node))
@@ -190,6 +212,10 @@ class Class(DocObject):
         
         for base in klass.bases:
             self.bases.append(base.id)
+    
+    @property
+    def code(self) -> str:
+        return self.signature()
         
     def signature(self) -> str:
         inherits = f"({', '.join(self.bases)})" if len(self.bases) > 0 else ""
@@ -303,7 +329,11 @@ class Method(DocObject):
             Argument(args.vararg) if args.vararg is not None else MISSING,  # vararg
             Argument(args.kwarg) if args.kwarg is not None else MISSING,    # kwarg
         )
-        
+
+    @property
+    def code(self) -> str:
+        return self.signature()
+
     def signature(self) -> str:
         return_anno = f" -> {self.returns}" if self.returns != MISSING else ""
 

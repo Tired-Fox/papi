@@ -1,0 +1,27 @@
+<python>
+    file_key = lambda f: f.file_name
+    file_filter = lambda f: f.file_name not in ['__init__.py', file.file_name] 
+    sorted_files = sorted(filter(file_filter, module.files()), key=file_key)
+</python>
+<div id="module-file-nav">
+    <div @if="file.parent.name != project">
+        <strong>
+            <a href="../">
+                < {file.parent.name}
+            </a>
+        </strong>
+    </div>
+    <ul id="module-files">
+        <li @for="sub_file in sorted_files">
+            <a href="{relative_url(file.url_path, sub_file.url_path)}">{sub_file.file_name}</a>
+        </li>
+        <li @for="mod in module.sub_modules()">
+            <a href="../{mod.name}/">{mod.name}</a>
+        </li>
+    </ul>
+</div>
+<style>
+    #module-file-nav {
+        margin-top: 1rem;
+    }
+</style>

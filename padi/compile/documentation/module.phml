@@ -1,36 +1,27 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="/playground/example/docs/assets/highlight.css">
+        <link rel="stylesheet" href="/playground/example/docs/assets/global.css">
         <title>{project}</title>
-        <style>
-            * {
-                box-sizing: border-box;
-            }
-            main {
-                display: flex;
-                width: 100%;
-            }
-
-            body {
-                width: 100%;
-                height: 100vh;
-                display: flex;
-                flex-direction: column;
-                margin: 0;
-                padding: 0;
-            }
-
-            body > main {
-                flex: 1;
-            }
-        </style>
+        <python>
+            def relative_url(origin, to="") -> str:
+                origin = origin.split("/")
+                to = to.split("/")
+                if len(origin) < len(to):
+                    start = len(to) - len(origin)
+                    return '/'.join(to[start:]) + "/"
+                else:
+                    start = len(origin) - len(to)
+                    return '/'.join('..' for _ in range(start)) + '/'.join(origin[start:])
+        </python>
     </head>
     <body>
-        <Header />
         <main>
+            <Header />
             <Nav />
             <Content />
+            <Footer />
         </main>
-        <Footer />
     </body>
 </html>

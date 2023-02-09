@@ -1,48 +1,13 @@
 <python>
-    def build_url(file, project):
+    from pathlib import Path
+
+    def build_url(file):
         sub_dir = "/" + '/'.join(file.parents) if len(file.parents) > 0 else ""
-        return f'/{project}' + sub_dir + '/' + file.name
+        return Path(sub_dir).joinpath(file.name).as_posix() + "/"
 </python>
 <nav id="module-nav">
-    <div @if="not blank(files)">
-        <ul id="module-files">
-            <li @for="file in filter(lambda f: f.file_name != '__init__.py', files)">
-                <a :href="build_url(file, project)">{file.file_name}</a>
-            </li>
-        </ul>
-    </div>
-    <div @if="not blank(module.public)">
-        <h3>Public</h3>
-        <ul>
-            <li @for="object in module.public">
-                <a href="#public-{object.name}">{object.name}</a>
-            </li>
-        </ul>
-    </div>
-    <div @if="not blank(module.protected)">
-        <h3>Protected</h3>
-        <ul>
-            <li @for="object in module.protected">
-                <a href="#protected-{object.name}">{object.name}</a>
-            </li>
-        </ul>
-    </div>
-    <div @if="not blank(module.private)">
-        <h3>Private</h3>
-        <ul>
-            <li @for="object in module.private">
-                <a href="#private-{object.name}">{object.name}</a>
-            </li>
-        </ul>
-    </div>
+    <Nav.FileNav />
+    <FileObjects scope="Public" :objects="file.public" />
+    <FileObjects scope="Protected" :objects="file.protected" />
+    <FileObjects scope="Private" :objects="file.private" />
 </nav>
-<style>
-    #module-nav {
-        flex: 1;
-        overflow: auto;
-    }
-
-    #module-files {
-        list-style: none;
-    }
-</style>

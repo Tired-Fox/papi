@@ -1,48 +1,8 @@
-<python>
-    from padi.nodes import Class, Method
-</python>
 <div id="module-content">
-    <article @if="not blank(module.docstring)">
-        <Markdown :src="module.docstring" />
-        <!-- <p>{module.docstring}</p> -->
+    <article @if="not blank(file.docstring)">
+        <Markdown :src="file.docstring" />
     </article>
-    <div @if="not blank(module.public)">
-        <h2>Public</h2>
-        <ul>
-            <li @for="object in module.public">
-                <Class @if="isinstance(object, Class)" :data="object" />
-                <Method @elif="isinstance(object, Method)" :data="object" />
-                <Assign @else :data="object" />
-            </li>
-        </ul>
-    </div>
-    <div @if="not blank(module.protected)">
-        <h2>Protected</h2>
-        <ul>
-            <li @for="object in module.protected">
-                <Class @if="isinstance(object, Class)" :data="object" />
-                <Method @elif="isinstance(object, Method)" :data="object" />
-                <Assign @else :data="object" />
-            </li>
-        </ul>
-    </div>
-    <div @if="not blank(module.private)">
-        <h2>Private</h2>
-        <ul class="no_style">
-            <li @for="object in module.private">
-                <Class @if="isinstance(object, Class)" :data="object" />
-                <Method @elif="isinstance(object, Method)" :data="object" />
-                <Assign @else :data="object" />
-            </li>
-        </ul>
-    </div>
+    <FileContent scope="Public" :objects="file.public" />
+    <FileContent scope="Protected" :objects="file.protected" />
+    <FileContent scope="Private" :objects="file.private" />
 </div>
-<style>
-    #module-content {
-        flex: 3;
-    }
-
-    .no_style {
-        list-style: none;
-    }
-</style>

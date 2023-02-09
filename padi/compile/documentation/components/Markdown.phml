@@ -1,11 +1,11 @@
 <python>
-    from markdown import Markdown
+    from markdown2 import Markdown
 
-    md = Markdown()
+    md = Markdown(extras=["smarty-pants", "strike", "fenced-code-blocks"])
     Props = {
         "src": ""
     }
 </python>
 <article>
-    {md.reset().convert(src)}
+    {md.convert(src)}
 </article>

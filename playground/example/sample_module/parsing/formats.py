@@ -6,6 +6,10 @@ from .decor import decor
 
 class AST:
     """Sample AST."""
+    
+    def sample(self) -> str:
+        """Return a sample of the ast."""
+        return ""
 
 @decor
 def compile():

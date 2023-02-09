@@ -1,0 +1,14 @@
+<python>
+    Props = {
+        "scope": "Public",
+        "objects": []
+    }
+</python>
+<div id="file-{scope.lower()}" @if="not blank(objects)">
+    <strong>{scope}</strong>
+    <ul>
+        <li @for="obj in objects">
+            <a href="#{scope.lower()}-{obj.name}">{obj.name}</a>
+        </li>
+    </ul>
+</div>

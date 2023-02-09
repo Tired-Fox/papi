@@ -1,0 +1,18 @@
+<python>
+    from padi.nodes import Class, Method
+
+    Props = {
+        "objects": None,
+        "scope": "Public"
+    }
+</python>
+<div @if="not blank(objects)">
+    <h3>{scope}</h3>
+    <ul>
+        <li @for="obj in objects">
+            <Class @if="isinstance(obj, Class)" :data="obj" :scope="scope.lower()"/>
+            <Method @elif="isinstance(obj, Method)" :data="obj" :scope="scope.lower()"/>
+            <Assign @else :data="obj" :scope="scope.lower()"/>
+        </li>
+    </ul>    
+</div>
