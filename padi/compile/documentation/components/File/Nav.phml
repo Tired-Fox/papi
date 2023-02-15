@@ -6,17 +6,20 @@
 <div id="module-file-nav">
     <div @if="file.parent.name != project">
         <strong>
-            <a href="../">
+            <a @if="file.name != module.name" href="{file.parent.url}">
                 < {file.parent.name}
+            </a>
+            <a @elif="not blank(file.parent.parent)" :href="file.parent.parent.url">
+                < {file.parent.parent.name}
             </a>
         </strong>
     </div>
     <ul id="module-files">
         <li @for="sub_file in sorted_files">
-            <a href="{relative_url(file.url_path, sub_file.url_path)}">{sub_file.file_name}</a>
+            <a href="{sub_file.url}">{sub_file.file_name}</a>
         </li>
         <li @for="mod in module.sub_modules()">
-            <a href="../{mod.name}/">{mod.name}</a>
+            <a href="{mod.url}">{mod.name}</a>
         </li>
     </ul>
 </div>

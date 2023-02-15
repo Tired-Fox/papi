@@ -1,20 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="/playground/example/docs/assets/highlight.css">
-        <link rel="stylesheet" href="/playground/example/docs/assets/global.css">
+        <link rel="stylesheet" href="/assets/highlight.css">
+        <link rel="stylesheet" href="/assets/global.css">
         <title>{project}</title>
-        <python>
-            def relative_url(origin, to="") -> str:
-                origin = origin.split("/")
-                to = to.split("/")
-                if len(origin) < len(to):
-                    start = len(to) - len(origin)
-                    return '/'.join(to[start:]) + "/"
-                else:
-                    start = len(origin) - len(to)
-                    return '/'.join('..' for _ in range(start)) + '/'.join(origin[start:])
-        </python>
     </head>
     <body>
         <main>

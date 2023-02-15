@@ -27,7 +27,12 @@ class File:
             raise TypeError(f"{self.path.as_posix()!r} is not a file.")
         
         f_ast = ast.parse(self.source, self.full_path)
-        if len(f_ast.body) > 0 and isinstance(f_ast.body[0], ast.Expr) and isinstance(f_ast.body[0].value.value, str):
+        if (
+            len(f_ast.body) > 0
+            and isinstance(f_ast.body[0], ast.Expr)
+            and isinstance(f_ast.body[0].value, ast.Constant)
+            and isinstance(f_ast.body[0].value.value, str)
+        ):
             self.docstring = f_ast.body[0].value.value
     
     @property
@@ -64,7 +69,7 @@ class File:
         return [path for path in self.path.as_posix().split("/")[:-1] if path.strip() != ""]
 
     @cached_property
-    def url_path(self) -> list[str]:
+    def url(self) -> list[str]:
         parts = [
                     path 
                     for path in self.full_path.as_posix().split("/")[:-1]
@@ -72,7 +77,7 @@ class File:
                 ][1:]
         if self.parent is not None and self.name != self.parent.name:
             parts.append(self.name)
-        return '/'.join(parts)
+        return '/' + '/'.join(parts) + '/'
     
     @cached_property
     def source(self) -> str:
@@ -162,15 +167,22 @@ class Module:
     def __contains__(self, key: str):
         return key in self.nested
     
+    @cached_property
+    def url(self) -> list[str]:
+        if '__init__.py' in self:
+            return self['__init__.py'].url
+        else:
+            return "/"
+    
     def add(self, obj: str | Path):
         path = str(obj).replace("\\", "/").strip("/").lstrip(self.path.as_posix())
         file = File(path=Path(path), full_path=Path(obj))
 
         current = self
         for parent in file.parents:
-            if parent not in self.nested:
-                self.nested[parent] = Module(parent, self.path.joinpath(parent), current)
-            current = self.nested[parent]
+            if parent not in current:
+                current.nested[parent] = Module(parent, self.path.joinpath(parent), current)
+            current = current[parent]
         if file.file_name not in current.nested:
             file.parent = current
             current.nested[file.file_name] = file
@@ -186,7 +198,7 @@ class Module:
                 yield value
             
     def pretty(self, indent: int = 0) -> str:
-        out = [f"{' '*indent}Module({self.name!r})"]
+        out = [f"{' '*indent}Module({self.name!r}, {self.parent.name if self.parent is not None else ''!r})"]
         for _, value in self:
             out.append(value.pretty(indent+2))
         return "\n".join(out)

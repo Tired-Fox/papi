@@ -75,6 +75,8 @@ class Annotation:
             self.annotations.append(Annotation.Or(annotation))
         elif isinstance(annotation, ast.Constant) and annotation.value is None:
             self.annotations.append("None")
+        elif isinstance(annotation, ast.Attribute):
+            self.annotations.append(Attribute(annotation))
         else:
             raise TypeError(f"Unkown annotation type {annotation}")
 
@@ -194,7 +196,12 @@ class Class(DocObject):
         self.name = klass.name
         previous = ""
         
-        if len(klass.body) > 0 and isinstance(klass.body[0], ast.Expr) and isinstance(klass.body[0].value.value, str):
+        if (
+            len(klass.body) > 0 
+            and isinstance(klass.body[0], ast.Expr) 
+            and isinstance(klass.body[0].value, ast.Constant)
+            and isinstance(klass.body[0].value.value, str)
+        ):
             self._docstring = klass.body[0].value.value
         
         for node in klass.body:
@@ -309,6 +316,7 @@ class Method(DocObject):
         if (
             len(method.body) > 0
             and isinstance(method.body[0], ast.Expr)
+            and isinstance(method.body[0].value, ast.Constant)
             and isinstance(method.body[0].value.value, str)
         ):
             self.docstring = method.body[0].value.value

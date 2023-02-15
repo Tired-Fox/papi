@@ -1,13 +1,6 @@
-<python>
-    from pathlib import Path
-
-    def build_url(file):
-        sub_dir = "/" + '/'.join(file.parents) if len(file.parents) > 0 else ""
-        return Path(sub_dir).joinpath(file.name).as_posix() + "/"
-</python>
 <nav id="module-nav">
-    <Nav.FileNav />
-    <FileObjects scope="Public" :objects="file.public" />
-    <FileObjects scope="Protected" :objects="file.protected" />
-    <FileObjects scope="Private" :objects="file.private" />
+    <File.Nav />
+    <File.Objects scope="Public" :objects="file.public" />
+    <File.Objects scope="Protected" :objects="file.protected" />
+    <File.Objects scope="Private" :objects="file.private" />
 </nav>

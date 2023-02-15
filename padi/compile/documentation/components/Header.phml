@@ -1,5 +1,5 @@
 <header>
-    <a :href="relative_url(file.url_path, '')"><h4>{project}</h4></a>
+    <a href="/"><h4>{project}</h4></a>
     <input
         type="text"
         placeholder="search"

@@ -2,7 +2,7 @@
     <article @if="not blank(file.docstring)">
         <Markdown :src="file.docstring" />
     </article>
-    <FileContent scope="Public" :objects="file.public" />
-    <FileContent scope="Protected" :objects="file.protected" />
-    <FileContent scope="Private" :objects="file.private" />
+    <File.Content scope="Public" :objects="file.public" />
+    <File.Content scope="Protected" :objects="file.protected" />
+    <File.Content scope="Private" :objects="file.private" />
 </div>
