@@ -1,67 +1,227 @@
 <!DOCTYPE html>
 <html>
+
     <head>
-        <link rel="stylesheet" href="/docs/assets/highlight.css"></link>
-        <link rel="stylesheet" href="/docs/assets/global.css"></link>
+        <link rel="stylesheet" href="/docs/assets/highlight.css" />
+        <link rel="stylesheet" href="/docs/assets/global.css" />
         <title>padi</title>
     </head>
+
     <body>
+        <header>
+            <a href="/docs/">
+                <h4>padi</h4>
+            </a>
+            <input type="text" placeholder="search" />
+        </header>
         <main>
-            <header>
-                <a href="/docs/">
-                    <h4>padi</h4>
-                </a>
-                <input type="text" placeholder="search"></input>
-            </header>
             <nav id="module-nav">
                 <div id="module-file-nav">
+                    <div>
+                        <strong>
+                            <a href="/docs/compile/">< compile</a>
+                        </strong>
+                    </div>
                     <ul id="module-files">
                         <li>
                             <a href="/docs/parse/">parse.py</a>
                         </li>
-                        <li>
-                            <a href="/docs/compile/">compile</a>
-                        </li>
-                        <li>
-                            <a href="/docs/nodes/">nodes</a>
-                        </li>
                     </ul>
                 </div>
-                <div scope="Private" objects="[Assign(__version__, value: 0.1.0)]" id="file-private">
-                    <strong>Private</strong>
+                <div id="file-public">
+                    <strong>Public</strong>
                     <ul>
                         <li>
-                            <a href="#private-__version__">__version__</a>
+                            <a href="#public-phml">phml</a>
+                        </li>
+                        <li>
+                            <a href="#public-code_highlight">code_highlight</a>
+                        </li>
+                        <li>
+                            <a href="#public-build_docs">build_docs</a>
                         </li>
                     </ul>
                 </div>
+                <div id="file-protected">
+                    <strong>Protected</strong>
+                    <ul>
+                        <li>
+                            <a href="#protected-_get_components">_get_components</a>
+                        </li>
+                        <li>
+                            <a href="#protected-_build_file">_build_file</a>
+                        </li>
+                        <li>
+                            <a href="#protected-_fix_urls">_fix_urls</a>
+                        </li>
+                        <li>
+                            <a href="#protected-_build_modules">_build_modules</a>
+                        </li>
+                    </ul>
+                </div>
+                <style>
+#module-file-nav {
+                        margin-top: 1rem;
+                    }
+                </style>
             </nav>
             <div id="module-content">
-                <div scope="Private" objects="[Assign(__version__, value: 0.1.0)]">
-                    <h3>Private</h3>
+                <details class="module-scope" open>
+                    <summary>
+                        <span class="module-scope-name">Public</span>
+                    </summary>
                     <ul>
                         <li>
-                            <div data="__version__ = '0.1.0'" scope="private" id="private-__version__" class="module-assign">
+                            <div id="public-phml" class="module-assign">
                                 <div class="module-object-header">
-                                    <a scope="private" name="__version__" href="#private-__version__" title="private variable: __version__">
+                                    <a href="#public-phml" title="public variable: phml">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="module-symbol module-symbol-assign">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5l-3.9 19.5m-2.1-19.5l-3.9 19.5"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5l-3.9 19.5m-2.1-19.5l-3.9 19.5" />
                                         </svg>
                                     </a>
-                                            <div class="codehilite">
-                                    <pre><span></span><code><span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.1.0&#39;</span>
-                                    </code></pre>
-                                    </div>
+<div class="codehilite">
+<pre><span></span><code><span class="n">phml</span> <span class="o">=</span> <span class="n">PHML</span><span class="p">()</span>
+</code></pre>
+</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div id="public-code_highlight" class="module-method">
+                                <div class="module-object-header">
+                                    <a href="#public-code_highlight" title="public method: code_highlight">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="module-symbol module-symbol-method">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 01-.657.643 48.39 48.39 0 01-4.163-.3c.186 1.613.293 3.25.315 4.907a.656.656 0 01-.658.663v0c-.355 0-.676-.186-.959-.401a1.647 1.647 0 00-1.003-.349c-1.036 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401v0c.31 0 .555.26.532.57a48.039 48.039 0 01-.642 5.056c1.518.19 3.058.309 4.616.354a.64.64 0 00.657-.643v0c0-.355-.186-.676-.401-.959a1.647 1.647 0 01-.349-1.003c0-1.035 1.008-1.875 2.25-1.875 1.243 0 2.25.84 2.25 1.875 0 .369-.128.713-.349 1.003-.215.283-.4.604-.4.959v0c0 .333.277.599.61.58a48.1 48.1 0 005.427-.63 48.05 48.05 0 00.582-4.717.532.532 0 00-.533-.57v0c-.355 0-.676.186-.959.401-.29.221-.634.349-1.003.349-1.035 0-1.875-1.007-1.875-2.25s.84-2.25 1.875-2.25c.37 0 .713.128 1.003.349.283.215.604.401.96.401v0a.656.656 0 00.658-.663 48.422 48.422 0 00-.37-5.36c-1.886.342-3.81.574-5.766.689a.578.578 0 01-.61-.58v0z" />
+                                        </svg>
+                                    </a>
+<div class="codehilite">
+<pre><span></span><code><span class="k">def</span> <span class="nf">code_highlight</span><span class="p">(</span><span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</code></pre>
+</div>
+                                </div>
+                                <div class="docstring">
+                                    <p>
+Exposed method to templates to allow for python code strings to be highlighted with markdown
+                                        and pygmentize.
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div id="public-build_docs" class="module-method">
+                                <div class="module-object-header">
+                                    <a href="#public-build_docs" title="public method: build_docs">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="module-symbol module-symbol-method">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 01-.657.643 48.39 48.39 0 01-4.163-.3c.186 1.613.293 3.25.315 4.907a.656.656 0 01-.658.663v0c-.355 0-.676-.186-.959-.401a1.647 1.647 0 00-1.003-.349c-1.036 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401v0c.31 0 .555.26.532.57a48.039 48.039 0 01-.642 5.056c1.518.19 3.058.309 4.616.354a.64.64 0 00.657-.643v0c0-.355-.186-.676-.401-.959a1.647 1.647 0 01-.349-1.003c0-1.035 1.008-1.875 2.25-1.875 1.243 0 2.25.84 2.25 1.875 0 .369-.128.713-.349 1.003-.215.283-.4.604-.4.959v0c0 .333.277.599.61.58a48.1 48.1 0 005.427-.63 48.05 48.05 0 00.582-4.717.532.532 0 00-.533-.57v0c-.355 0-.676.186-.959.401-.29.221-.634.349-1.003.349-1.035 0-1.875-1.007-1.875-2.25s.84-2.25 1.875-2.25c.37 0 .713.128 1.003.349.283.215.604.401.96.401v0a.656.656 0 00.658-.663 48.422 48.422 0 00-.37-5.36c-1.886.342-3.81.574-5.766.689a.578.578 0 01-.61-.58v0z" />
+                                        </svg>
+                                    </a>
+<div class="codehilite">
+<pre><span></span><code><span class="k">def</span> <span class="nf">build_docs</span><span class="p">(</span><span class="n">module</span><span class="p">:</span> <span class="n">Module</span><span class="p">,</span> <span class="n">project</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">out</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">user_templates</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;docs/&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</code></pre>
+</div>
+                                </div>
+                                <div class="docstring">
+                                    <p>Build the documentation of the module.</p>
                                 </div>
                             </div>
                         </li>
                     </ul>
-                </div>
+                </details>
+                <details class="module-scope">
+                    <summary>
+                        <span class="module-scope-name">Protected</span>
+                    </summary>
+                    <ul>
+                        <li>
+                            <div id="protected-_get_components" class="module-method">
+                                <div class="module-object-header">
+                                    <a href="#protected-_get_components" title="protected method: _get_components">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="module-symbol module-symbol-method">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 01-.657.643 48.39 48.39 0 01-4.163-.3c.186 1.613.293 3.25.315 4.907a.656.656 0 01-.658.663v0c-.355 0-.676-.186-.959-.401a1.647 1.647 0 00-1.003-.349c-1.036 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401v0c.31 0 .555.26.532.57a48.039 48.039 0 01-.642 5.056c1.518.19 3.058.309 4.616.354a.64.64 0 00.657-.643v0c0-.355-.186-.676-.401-.959a1.647 1.647 0 01-.349-1.003c0-1.035 1.008-1.875 2.25-1.875 1.243 0 2.25.84 2.25 1.875 0 .369-.128.713-.349 1.003-.215.283-.4.604-.4.959v0c0 .333.277.599.61.58a48.1 48.1 0 005.427-.63 48.05 48.05 0 00.582-4.717.532.532 0 00-.533-.57v0c-.355 0-.676.186-.959.401-.29.221-.634.349-1.003.349-1.035 0-1.875-1.007-1.875-2.25s.84-2.25 1.875-2.25c.37 0 .713.128 1.003.349.283.215.604.401.96.401v0a.656.656 0 00.658-.663 48.422 48.422 0 00-.37-5.36c-1.886.342-3.81.574-5.766.689a.578.578 0 01-.61-.58v0z" />
+                                        </svg>
+                                    </a>
+<div class="codehilite">
+<pre><span></span><code><span class="k">def</span> <span class="nf">_get_components</span><span class="p">(</span><span class="n">user_templates</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+</code></pre>
+</div>
+                                </div>
+                                <div class="docstring">
+                                    <p>Extract user components from the user defined path of custom components</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div id="protected-_build_file" class="module-method">
+                                <div class="module-object-header">
+                                    <a href="#protected-_build_file" title="protected method: _build_file">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="module-symbol module-symbol-method">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 01-.657.643 48.39 48.39 0 01-4.163-.3c.186 1.613.293 3.25.315 4.907a.656.656 0 01-.658.663v0c-.355 0-.676-.186-.959-.401a1.647 1.647 0 00-1.003-.349c-1.036 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401v0c.31 0 .555.26.532.57a48.039 48.039 0 01-.642 5.056c1.518.19 3.058.309 4.616.354a.64.64 0 00.657-.643v0c0-.355-.186-.676-.401-.959a1.647 1.647 0 01-.349-1.003c0-1.035 1.008-1.875 2.25-1.875 1.243 0 2.25.84 2.25 1.875 0 .369-.128.713-.349 1.003-.215.283-.4.604-.4.959v0c0 .333.277.599.61.58a48.1 48.1 0 005.427-.63 48.05 48.05 0 00.582-4.717.532.532 0 00-.533-.57v0c-.355 0-.676.186-.959.401-.29.221-.634.349-1.003.349-1.035 0-1.875-1.007-1.875-2.25s.84-2.25 1.875-2.25c.37 0 .713.128 1.003.349.283.215.604.401.96.401v0a.656.656 0 00.658-.663 48.422 48.422 0 00-.37-5.36c-1.886.342-3.81.574-5.766.689a.578.578 0 01-.61-.58v0z" />
+                                        </svg>
+                                    </a>
+<div class="codehilite">
+<pre><span></span><code><span class="k">def</span> <span class="nf">_build_file</span><span class="p">(</span><span class="n">module</span><span class="p">:</span> <span class="n">Module</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="n">File</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span>
+</code></pre>
+</div>
+                                </div>
+                                <div class="docstring">
+                                    <p>Build a specific python files documentation page.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div id="protected-_fix_urls" class="module-method">
+                                <div class="module-object-header">
+                                    <a href="#protected-_fix_urls" title="protected method: _fix_urls">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="module-symbol module-symbol-method">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 01-.657.643 48.39 48.39 0 01-4.163-.3c.186 1.613.293 3.25.315 4.907a.656.656 0 01-.658.663v0c-.355 0-.676-.186-.959-.401a1.647 1.647 0 00-1.003-.349c-1.036 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401v0c.31 0 .555.26.532.57a48.039 48.039 0 01-.642 5.056c1.518.19 3.058.309 4.616.354a.64.64 0 00.657-.643v0c0-.355-.186-.676-.401-.959a1.647 1.647 0 01-.349-1.003c0-1.035 1.008-1.875 2.25-1.875 1.243 0 2.25.84 2.25 1.875 0 .369-.128.713-.349 1.003-.215.283-.4.604-.4.959v0c0 .333.277.599.61.58a48.1 48.1 0 005.427-.63 48.05 48.05 0 00.582-4.717.532.532 0 00-.533-.57v0c-.355 0-.676.186-.959.401-.29.221-.634.349-1.003.349-1.035 0-1.875-1.007-1.875-2.25s.84-2.25 1.875-2.25c.37 0 .713.128 1.003.349.283.215.604.401.96.401v0a.656.656 0 00.658-.663 48.422 48.422 0 00-.37-5.36c-1.886.342-3.81.574-5.766.689a.578.578 0 01-.61-.58v0z" />
+                                        </svg>
+                                    </a>
+<div class="codehilite">
+<pre><span></span><code><span class="k">def</span> <span class="nf">_fix_urls</span><span class="p">(</span><span class="n">ast</span><span class="p">:</span> <span class="n">AST</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span>
+</code></pre>
+</div>
+                                </div>
+                                <div class="docstring">
+                                    <p>
+Any url prefixed with
+                                        <code>/</code>
+and doesn't start with the website root will
+automatically have the website root prefixed to it. This is applies for all
+elements with
+                                        <code>src</code>
+or
+                                        <code>href</code>
+attributes.
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div id="protected-_build_modules" class="module-method">
+                                <div class="module-object-header">
+                                    <a href="#protected-_build_modules" title="protected method: _build_modules">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="module-symbol module-symbol-method">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 01-.657.643 48.39 48.39 0 01-4.163-.3c.186 1.613.293 3.25.315 4.907a.656.656 0 01-.658.663v0c-.355 0-.676-.186-.959-.401a1.647 1.647 0 00-1.003-.349c-1.036 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401v0c.31 0 .555.26.532.57a48.039 48.039 0 01-.642 5.056c1.518.19 3.058.309 4.616.354a.64.64 0 00.657-.643v0c0-.355-.186-.676-.401-.959a1.647 1.647 0 01-.349-1.003c0-1.035 1.008-1.875 2.25-1.875 1.243 0 2.25.84 2.25 1.875 0 .369-.128.713-.349 1.003-.215.283-.4.604-.4.959v0c0 .333.277.599.61.58a48.1 48.1 0 005.427-.63 48.05 48.05 0 00.582-4.717.532.532 0 00-.533-.57v0c-.355 0-.676.186-.959.401-.29.221-.634.349-1.003.349-1.035 0-1.875-1.007-1.875-2.25s.84-2.25 1.875-2.25c.37 0 .713.128 1.003.349.283.215.604.401.96.401v0a.656.656 0 00.658-.663 48.422 48.422 0 00-.37-5.36c-1.886.342-3.81.574-5.766.689a.578.578 0 01-.61-.58v0z" />
+                                        </svg>
+                                    </a>
+<div class="codehilite">
+<pre><span></span><code><span class="k">def</span> <span class="nf">_build_modules</span><span class="p">(</span><span class="n">root</span><span class="p">:</span> <span class="n">Module</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">template</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">out</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">website_root</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+</code></pre>
+</div>
+                                </div>
+                                <div class="docstring">
+                                    <p>Build the files and modules inside of a given module.</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </details>
             </div>
-            <footer>
-                <p>padi</p>
-                <p>v1</p>
-            </footer>
         </main>
+        <footer>
+            <p>padi</p>
+            <p>v1</p>
+        </footer>
     </body>
+
 </html>

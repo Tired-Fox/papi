@@ -6,11 +6,11 @@
         <title>{project}</title>
     </head>
     <body>
+        <Header />
         <main>
-            <Header />
             <Nav />
             <Content />
-            <Footer />
         </main>
+        <Footer />
     </body>
 </html>

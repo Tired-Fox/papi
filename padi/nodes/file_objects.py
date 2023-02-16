@@ -16,7 +16,9 @@ __all__ = [
     "Argument"
 ]
 
-class Missing: 
+class FONode: pass
+
+class Missing(FONode): 
     def __repr__(self) -> str:
         return f"MISSING"
 
@@ -31,9 +33,11 @@ def get_value(default):
         return Collection(default)
     if isinstance(default, ast.Attribute):
         return Attribute(default)
+    if isinstance(default, ast.Call):
+        return Call(default)
     return default
 
-class DocObject:
+class DocObject(FONode):
     def __init__(self) -> None:
         self._docstring = ""
 
@@ -64,7 +68,7 @@ class DocObject:
 
         self._docstring = "\n".join(content)
 
-class Annotation:
+class Annotation(FONode):
     def __init__(self, annotation) -> None:
         self.annotations = []
         if isinstance(annotation, ast.Name):
@@ -80,7 +84,7 @@ class Annotation:
         else:
             raise TypeError(f"Unkown annotation type {annotation}")
 
-    class Or:
+    class Or(FONode):
         def __init__(self, ops: ast.BinOp) -> None:
             self.left = Annotation(ops.left)
             self.right = Annotation(ops.right)
@@ -88,7 +92,7 @@ class Annotation:
         def __str__(self) -> str:
             return f"{self.left} | {self.right}"
             
-    class Subscript:
+    class Subscript(FONode):
         def __init__(self, subscript: ast.Subscript) -> None:
             self.name = subscript.value.id
             self.annotations = []
@@ -102,7 +106,7 @@ class Annotation:
     def __str__(self) -> str:
         return ", ".join(str(annotation) for annotation in self.annotations)
 
-class Collection:
+class Collection(FONode):
     def __init__(self, collection: ast.List | ast.Tuple | ast.Set) -> None:
         self.brackets = ["(", ")"] if isinstance(collection, (ast.Tuple, ast.Set)) else ["[", "]"]
         self.elements = [get_value(element) for element in collection.elts]
@@ -120,7 +124,7 @@ class Collection:
 {', '.join(elements)}\
 {self.brackets[1]}{self.trailing}"
 
-class Attribute:
+class Attribute(FONode):
     def __init__(self, attr: ast.Attribute) -> None:
         self.name = get_value(attr.value)
         self.attr = get_value(attr.attr)
@@ -131,7 +135,7 @@ class Attribute:
     def __repr__(self) -> str:
         return f"Attr({self.name}, attr: {self.attr})"
 
-class Assign(DocObject):
+class Assign(DocObject, FONode):
     def __init__(self, attr: ast.Assign) -> None:
         super().__init__()
         self.name = attr.targets[0].id
@@ -157,7 +161,7 @@ class Assign(DocObject):
         )
         return f"{self.name}{value}"
     
-class AnnAssign(DocObject):
+class AnnAssign(DocObject, FONode):
     def __init__(self, attr: ast.AnnAssign) -> None:
         super().__init__()
         self.name = attr.target.id
@@ -186,7 +190,39 @@ class AnnAssign(DocObject):
         )
         return f"{self.name}{annotation}{value}"
 
-class Class(DocObject):
+class Starred(FONode):
+    def __init__(self, starred: ast.Starred) -> None:
+        self.name = get_value(starred.value)
+    
+    def __str__(self) -> str:
+        return f"*{self.name}"
+
+class Keyword(FONode):
+    def __init__(self, keyword: ast.keyword) -> None:
+        self.name = keyword.arg or MISSING
+        self.value = get_value(keyword.value)
+    
+    def __str__(self) -> str:
+        if self.name == MISSING:
+            return f"**{self.value}"
+        else:
+            return f"{self.name}={self.name}"
+
+class Call(FONode):
+    def __init__(self, _call: ast.Call) -> None:
+        self.name = get_value(_call.func)
+        self.args = [get_value(arg) for arg in _call.args]
+        self.keywords = [Keyword(kw) for kw in _call.keywords]
+    
+    @property
+    def code(self) -> str:
+        return str(self)
+        
+    def __str__(self) -> str:
+        args = [*self.args, *self.keywords]      
+        return f"{self.name}({', '.join(str(arg) for arg in args)})"
+
+class Class(DocObject, FONode):
     def __init__(self, klass: ast.ClassDef) -> None:
         super().__init__()
         self.attributes = []
@@ -237,7 +273,7 @@ class Class(DocObject):
             out.append('   ' + klass.signature())
         return "\n".join(out)
 
-class Argument:
+class Argument(FONode):
     def __init__(self, arg: ast.arg) -> None:
         self.name = arg.arg
         self.annotation = Annotation(arg.annotation) if arg.annotation is not None else MISSING
@@ -255,7 +291,7 @@ class Argument:
     def __repr__(self) -> str:
         return f"Arg({self.name!r}, {self.annotation!r}, {self.default!r})"
 
-class Import(DocObject):
+class Import(DocObject, FONode):
     def __init__(self, _import: ast.Import | ast.ImportFrom) -> None:
         super().__init__()
         self.module = MISSING
@@ -282,7 +318,7 @@ class Import(DocObject):
     def __repr__(self) -> str:
         return  f"Import(from: {self.module!r}, names: [{f', '.join(self.names)}, lvl: {self.level}])"
 
-class Method(DocObject):
+class Method(DocObject, FONode):
     args: list
     """Methods arguments"""
     

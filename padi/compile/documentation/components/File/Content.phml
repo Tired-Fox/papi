@@ -6,13 +6,15 @@
         "scope": "Public"
     }
 </python>
-<div @if="not blank(objects)">
-    <h3>{scope}</h3>
+<details @if="not blank(objects)" class="module-scope" :open="scope == 'Public'">
+    <summary><span class="module-scope-name">{scope}</span></summary>
     <ul>
-        <li @for="obj in objects">
-            <Class @if="isinstance(obj, Class)" :data="obj" :scope="scope.lower()"/>
-            <Method @elif="isinstance(obj, Method)" :data="obj" :scope="scope.lower()"/>
-            <Assign @else :data="obj" :scope="scope.lower()"/>
-        </li>
+        <For each={obj in objects /}>
+            <li>
+                <Class @if="isinstance(obj, Class)" :data="obj" :scope="scope.lower()"/>
+                <Method @elif="isinstance(obj, Method)" :data="obj" :scope="scope.lower()"/>
+                <Assign @else :data="obj" :scope="scope.lower()"/>
+            </li>
+        </For>
     </ul>    
-</div>
+</details>

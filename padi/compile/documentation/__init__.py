@@ -1,7 +1,7 @@
 from pathlib import Path
 from shutil import copytree, rmtree
 
-from phml import PHML, AST, query_all
+from phml import PHML, AST, query_all, inspect
 from markdown2 import Markdown # https://github.com/trentm/python-markdown2
 
 from padi.nodes import *
@@ -20,6 +20,7 @@ def _get_components(user_templates: str = ""):
 
 def _build_file(module: Module, file: File, root: Path, name: str, version: str):
     """Build a specific python files documentation page."""
+
     return phml.load(root).compile(
         project=name,
         version=version,
@@ -52,6 +53,7 @@ def _fix_urls(ast: AST, root: str):
             for node in query_all(ast, f"[{link_type}^=/]"):
                 if not node[link_type].startswith(root):
                     node[link_type] = "/" + root.strip("/") + "/" + node[link_type].lstrip("/")
+    return ast
     
 def _build_modules(
     root: Module,
@@ -67,7 +69,7 @@ def _build_modules(
     out.joinpath(root["__init__.py"].url.lstrip("/")).mkdir(parents=True, exist_ok=True)
     # Write the home page
     with open(out.joinpath(root["__init__.py"].url.lstrip("/"), "index.html"), "+w", encoding="utf-8") as file:
-        _fix_urls(
+        phml.ast = _fix_urls(
             _build_file(root, root["__init__.py"], template, name, version),
             website_root
         )
@@ -75,7 +77,7 @@ def _build_modules(
     
     for file in root.files():
         if file.file_name != "__init__.py":
-            _fix_urls(
+            phml.ast = _fix_urls(
                 _build_file(root, root[file.file_name], template, name, version),
                 website_root
             )

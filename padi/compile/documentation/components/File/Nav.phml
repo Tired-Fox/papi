@@ -15,12 +15,16 @@
         </strong>
     </div>
     <ul id="module-files">
-        <li @for="sub_file in sorted_files">
-            <a href="{sub_file.url}">{sub_file.file_name}</a>
-        </li>
-        <li @for="mod in module.sub_modules()">
-            <a href="{mod.url}">{mod.name}</a>
-        </li>
+        <For each={sub_file in sorted_files /}>
+            <li>
+                <a href="{sub_file.url}">{sub_file.file_name}</a>
+            </li>
+        </For>
+        <For each={mod in module.sub_modules() /}>
+            <li>
+                <a href="{mod.url}">{mod.name}</a>
+            </li>
+        </For>
     </ul>
 </div>
 <style>

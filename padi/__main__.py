@@ -29,11 +29,7 @@ def documentation(module: str,  output: str, root: str, layouts: str, version: b
 
     # Parse data from found python files
     project_module = construct_module(module)
-    # input(project_module)
-    # for sm in project_module.sub_modules():
-    #     for file in sm.files():
-    #         print(file.objects)
-    #     input()
+
     # Build docs from phml templates
     build_docs(project_module, module, root=root, user_templates=layouts)
 

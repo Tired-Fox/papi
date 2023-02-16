@@ -1,67 +1,412 @@
 <!DOCTYPE html>
 <html>
+
     <head>
-        <link rel="stylesheet" href="/docs/assets/highlight.css"></link>
-        <link rel="stylesheet" href="/docs/assets/global.css"></link>
+        <link rel="stylesheet" href="/docs/assets/highlight.css" />
+        <link rel="stylesheet" href="/docs/assets/global.css" />
         <title>padi</title>
     </head>
+
     <body>
+        <header>
+            <a href="/docs/">
+                <h4>padi</h4>
+            </a>
+            <input type="text" placeholder="search" />
+        </header>
         <main>
-            <header>
-                <a href="/docs/">
-                    <h4>padi</h4>
-                </a>
-                <input type="text" placeholder="search"></input>
-            </header>
             <nav id="module-nav">
                 <div id="module-file-nav">
+                    <div>
+                        <strong>
+                            <a href="/docs/nodes/">< nodes</a>
+                        </strong>
+                    </div>
                     <ul id="module-files">
                         <li>
                             <a href="/docs/parse/">parse.py</a>
                         </li>
+                    </ul>
+                </div>
+                <div id="file-public">
+                    <strong>Public</strong>
+                    <ul>
                         <li>
-                            <a href="/docs/compile/">compile</a>
+                            <a href="#public-md">md</a>
                         </li>
                         <li>
-                            <a href="/docs/nodes/">nodes</a>
+                            <a href="#public-FONode">FONode</a>
+                        </li>
+                        <li>
+                            <a href="#public-Missing">Missing</a>
+                        </li>
+                        <li>
+                            <a href="#public-MISSING">MISSING</a>
+                        </li>
+                        <li>
+                            <a href="#public-get_value">get_value</a>
+                        </li>
+                        <li>
+                            <a href="#public-DocObject">DocObject</a>
+                        </li>
+                        <li>
+                            <a href="#public-Annotation">Annotation</a>
+                        </li>
+                        <li>
+                            <a href="#public-Collection">Collection</a>
+                        </li>
+                        <li>
+                            <a href="#public-Attribute">Attribute</a>
+                        </li>
+                        <li>
+                            <a href="#public-Assign">Assign</a>
+                        </li>
+                        <li>
+                            <a href="#public-AnnAssign">AnnAssign</a>
+                        </li>
+                        <li>
+                            <a href="#public-Starred">Starred</a>
+                        </li>
+                        <li>
+                            <a href="#public-Keyword">Keyword</a>
+                        </li>
+                        <li>
+                            <a href="#public-Call">Call</a>
+                        </li>
+                        <li>
+                            <a href="#public-Class">Class</a>
+                        </li>
+                        <li>
+                            <a href="#public-Argument">Argument</a>
+                        </li>
+                        <li>
+                            <a href="#public-Import">Import</a>
+                        </li>
+                        <li>
+                            <a href="#public-Method">Method</a>
                         </li>
                     </ul>
                 </div>
-                <div scope="Private" objects="[Assign(__version__, value: 0.1.0)]" id="file-private">
+                <div id="file-private">
                     <strong>Private</strong>
                     <ul>
                         <li>
-                            <a href="#private-__version__">__version__</a>
+                            <a href="#private-__all__">__all__</a>
                         </li>
                     </ul>
                 </div>
+                <style>
+#module-file-nav {
+                        margin-top: 1rem;
+                    }
+                </style>
             </nav>
             <div id="module-content">
-                <div scope="Private" objects="[Assign(__version__, value: 0.1.0)]">
-                    <h3>Private</h3>
+                <details class="module-scope" open>
+                    <summary>
+                        <span class="module-scope-name">Public</span>
+                    </summary>
                     <ul>
                         <li>
-                            <div data="__version__ = '0.1.0'" scope="private" id="private-__version__" class="module-assign">
+                            <div id="public-md" class="module-assign">
                                 <div class="module-object-header">
-                                    <a scope="private" name="__version__" href="#private-__version__" title="private variable: __version__">
+                                    <a href="#public-md" title="public variable: md">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="module-symbol module-symbol-assign">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5l-3.9 19.5m-2.1-19.5l-3.9 19.5"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5l-3.9 19.5m-2.1-19.5l-3.9 19.5" />
                                         </svg>
                                     </a>
-                                            <div class="codehilite">
-                                    <pre><span></span><code><span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.1.0&#39;</span>
-                                    </code></pre>
-                                    </div>
+<div class="codehilite">
+<pre><span></span><code><span class="n">md</span> <span class="o">=</span> <span class="n">Markdown</span><span class="p">(</span><span class="n">extras</span><span class="o">=</span><span class="n">extras</span><span class="p">)</span>
+</code></pre>
+</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div id="public-FONode" class="module-class">
+                                <div class="module-object-header">
+                                    <a href="#public-FONode" title="public class: FONode">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="module-symbol module-symbol-class">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                                        </svg>
+                                    </a>
+<div class="codehilite">
+<pre><span></span><code><span class="k">class</span> <span class="nc">FONode</span>
+</code></pre>
+</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div id="public-Missing" class="module-class">
+                                <div class="module-object-header">
+                                    <a href="#public-Missing" title="public class: Missing">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="module-symbol module-symbol-class">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                                        </svg>
+                                    </a>
+<div class="codehilite">
+<pre><span></span><code><span class="k">class</span> <span class="nc">Missing</span><span class="p">(</span><span class="n">FONode</span><span class="p">)</span>
+</code></pre>
+</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div id="public-MISSING" class="module-assign">
+                                <div class="module-object-header">
+                                    <a href="#public-MISSING" title="public variable: MISSING">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="module-symbol module-symbol-assign">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5l-3.9 19.5m-2.1-19.5l-3.9 19.5" />
+                                        </svg>
+                                    </a>
+<div class="codehilite">
+<pre><span></span><code><span class="n">MISSING</span> <span class="o">=</span> <span class="n">Missing</span><span class="p">()</span>
+</code></pre>
+</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div id="public-get_value" class="module-method">
+                                <div class="module-object-header">
+                                    <a href="#public-get_value" title="public method: get_value">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="module-symbol module-symbol-method">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 01-.657.643 48.39 48.39 0 01-4.163-.3c.186 1.613.293 3.25.315 4.907a.656.656 0 01-.658.663v0c-.355 0-.676-.186-.959-.401a1.647 1.647 0 00-1.003-.349c-1.036 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401v0c.31 0 .555.26.532.57a48.039 48.039 0 01-.642 5.056c1.518.19 3.058.309 4.616.354a.64.64 0 00.657-.643v0c0-.355-.186-.676-.401-.959a1.647 1.647 0 01-.349-1.003c0-1.035 1.008-1.875 2.25-1.875 1.243 0 2.25.84 2.25 1.875 0 .369-.128.713-.349 1.003-.215.283-.4.604-.4.959v0c0 .333.277.599.61.58a48.1 48.1 0 005.427-.63 48.05 48.05 0 00.582-4.717.532.532 0 00-.533-.57v0c-.355 0-.676.186-.959.401-.29.221-.634.349-1.003.349-1.035 0-1.875-1.007-1.875-2.25s.84-2.25 1.875-2.25c.37 0 .713.128 1.003.349.283.215.604.401.96.401v0a.656.656 0 00.658-.663 48.422 48.422 0 00-.37-5.36c-1.886.342-3.81.574-5.766.689a.578.578 0 01-.61-.58v0z" />
+                                        </svg>
+                                    </a>
+<div class="codehilite">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_value</span><span class="p">(</span><span class="n">default</span><span class="p">)</span>
+</code></pre>
+</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div id="public-DocObject" class="module-class">
+                                <div class="module-object-header">
+                                    <a href="#public-DocObject" title="public class: DocObject">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="module-symbol module-symbol-class">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                                        </svg>
+                                    </a>
+<div class="codehilite">
+<pre><span></span><code><span class="k">class</span> <span class="nc">DocObject</span><span class="p">(</span><span class="n">FONode</span><span class="p">)</span>
+</code></pre>
+</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div id="public-Annotation" class="module-class">
+                                <div class="module-object-header">
+                                    <a href="#public-Annotation" title="public class: Annotation">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="module-symbol module-symbol-class">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                                        </svg>
+                                    </a>
+<div class="codehilite">
+<pre><span></span><code><span class="k">class</span> <span class="nc">Annotation</span><span class="p">(</span><span class="n">FONode</span><span class="p">)</span>
+</code></pre>
+</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div id="public-Collection" class="module-class">
+                                <div class="module-object-header">
+                                    <a href="#public-Collection" title="public class: Collection">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="module-symbol module-symbol-class">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                                        </svg>
+                                    </a>
+<div class="codehilite">
+<pre><span></span><code><span class="k">class</span> <span class="nc">Collection</span><span class="p">(</span><span class="n">FONode</span><span class="p">)</span>
+</code></pre>
+</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div id="public-Attribute" class="module-class">
+                                <div class="module-object-header">
+                                    <a href="#public-Attribute" title="public class: Attribute">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="module-symbol module-symbol-class">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                                        </svg>
+                                    </a>
+<div class="codehilite">
+<pre><span></span><code><span class="k">class</span> <span class="nc">Attribute</span><span class="p">(</span><span class="n">FONode</span><span class="p">)</span>
+</code></pre>
+</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div id="public-Assign" class="module-class">
+                                <div class="module-object-header">
+                                    <a href="#public-Assign" title="public class: Assign">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="module-symbol module-symbol-class">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                                        </svg>
+                                    </a>
+<div class="codehilite">
+<pre><span></span><code><span class="k">class</span> <span class="nc">Assign</span><span class="p">(</span><span class="n">DocObject</span><span class="p">,</span> <span class="n">FONode</span><span class="p">)</span>
+</code></pre>
+</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div id="public-AnnAssign" class="module-class">
+                                <div class="module-object-header">
+                                    <a href="#public-AnnAssign" title="public class: AnnAssign">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="module-symbol module-symbol-class">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                                        </svg>
+                                    </a>
+<div class="codehilite">
+<pre><span></span><code><span class="k">class</span> <span class="nc">AnnAssign</span><span class="p">(</span><span class="n">DocObject</span><span class="p">,</span> <span class="n">FONode</span><span class="p">)</span>
+</code></pre>
+</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div id="public-Starred" class="module-class">
+                                <div class="module-object-header">
+                                    <a href="#public-Starred" title="public class: Starred">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="module-symbol module-symbol-class">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                                        </svg>
+                                    </a>
+<div class="codehilite">
+<pre><span></span><code><span class="k">class</span> <span class="nc">Starred</span><span class="p">(</span><span class="n">FONode</span><span class="p">)</span>
+</code></pre>
+</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div id="public-Keyword" class="module-class">
+                                <div class="module-object-header">
+                                    <a href="#public-Keyword" title="public class: Keyword">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="module-symbol module-symbol-class">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                                        </svg>
+                                    </a>
+<div class="codehilite">
+<pre><span></span><code><span class="k">class</span> <span class="nc">Keyword</span><span class="p">(</span><span class="n">FONode</span><span class="p">)</span>
+</code></pre>
+</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div id="public-Call" class="module-class">
+                                <div class="module-object-header">
+                                    <a href="#public-Call" title="public class: Call">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="module-symbol module-symbol-class">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                                        </svg>
+                                    </a>
+<div class="codehilite">
+<pre><span></span><code><span class="k">class</span> <span class="nc">Call</span><span class="p">(</span><span class="n">FONode</span><span class="p">)</span>
+</code></pre>
+</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div id="public-Class" class="module-class">
+                                <div class="module-object-header">
+                                    <a href="#public-Class" title="public class: Class">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="module-symbol module-symbol-class">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                                        </svg>
+                                    </a>
+<div class="codehilite">
+<pre><span></span><code><span class="k">class</span> <span class="nc">Class</span><span class="p">(</span><span class="n">DocObject</span><span class="p">,</span> <span class="n">FONode</span><span class="p">)</span>
+</code></pre>
+</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div id="public-Argument" class="module-class">
+                                <div class="module-object-header">
+                                    <a href="#public-Argument" title="public class: Argument">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="module-symbol module-symbol-class">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                                        </svg>
+                                    </a>
+<div class="codehilite">
+<pre><span></span><code><span class="k">class</span> <span class="nc">Argument</span><span class="p">(</span><span class="n">FONode</span><span class="p">)</span>
+</code></pre>
+</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div id="public-Import" class="module-class">
+                                <div class="module-object-header">
+                                    <a href="#public-Import" title="public class: Import">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="module-symbol module-symbol-class">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                                        </svg>
+                                    </a>
+<div class="codehilite">
+<pre><span></span><code><span class="k">class</span> <span class="nc">Import</span><span class="p">(</span><span class="n">DocObject</span><span class="p">,</span> <span class="n">FONode</span><span class="p">)</span>
+</code></pre>
+</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div id="public-Method" class="module-class">
+                                <div class="module-object-header">
+                                    <a href="#public-Method" title="public class: Method">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="module-symbol module-symbol-class">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                                        </svg>
+                                    </a>
+<div class="codehilite">
+<pre><span></span><code><span class="k">class</span> <span class="nc">Method</span><span class="p">(</span><span class="n">DocObject</span><span class="p">,</span> <span class="n">FONode</span><span class="p">)</span>
+</code></pre>
+</div>
                                 </div>
                             </div>
                         </li>
                     </ul>
-                </div>
+                </details>
+                <details class="module-scope">
+                    <summary>
+                        <span class="module-scope-name">Private</span>
+                    </summary>
+                    <ul>
+                        <li>
+                            <div id="private-__all__" class="module-assign">
+                                <div class="module-object-header">
+                                    <a href="#private-__all__" title="private variable: __all__">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="module-symbol module-symbol-assign">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5l-3.9 19.5m-2.1-19.5l-3.9 19.5" />
+                                        </svg>
+                                    </a>
+<div class="codehilite">
+<pre><span></span><code><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;MISSING&#39;</span><span class="p">,</span> <span class="s1">&#39;get_value&#39;</span><span class="p">,</span> <span class="s1">&#39;Annotation&#39;</span><span class="p">,</span> <span class="s1">&#39;Collection&#39;</span><span class="p">,</span> <span class="s1">&#39;Assign&#39;</span><span class="p">,</span> <span class="s1">&#39;AnnAssign&#39;</span><span class="p">,</span> <span class="s1">&#39;Class&#39;</span><span class="p">,</span> <span class="s1">&#39;Method&#39;</span><span class="p">,</span> <span class="s1">&#39;Argument&#39;</span><span class="p">]</span>
+</code></pre>
+</div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </details>
             </div>
-            <footer>
-                <p>padi</p>
-                <p>v1</p>
-            </footer>
         </main>
+        <footer>
+            <p>padi</p>
+            <p>v1</p>
+        </footer>
     </body>
+
 </html>

@@ -17,7 +17,9 @@ __all__ = [
 
 DocObject = Method | Class | Assign | AnnAssign
 
-class File:
+class FSNode: pass
+
+class File(FSNode):
     def __init__(self, path: str | Path, full_path: str | Path) -> None:
         self.path = path if isinstance(path, Path) else Path(path)
         self.full_path = full_path if isinstance(full_path, Path) else Path(full_path)
@@ -146,10 +148,13 @@ class File:
     def pretty(self, indent: int = 0) -> str:
         return f"{' '*indent}File({self.file_name!r})"
             
+    def __repr__(self) -> str:
+        return f"File({str(self.full_path)!r}, [{', '.join(str(obj) for obj in self.objects)}])"
+            
     def __str__(self) -> str:
         return self.pretty()
 
-class Module:
+class Module(FSNode):
     def __init__(self, name: str, path: str, parent: Module | None = None) -> None:
         self.name = name
         self.path = Path(str(path).replace("\\", "/").strip("/"))
@@ -166,6 +171,16 @@ class Module:
     
     def __contains__(self, key: str):
         return key in self.nested
+    
+    def all_files(self) -> Iterator[File]:
+        def recursive(module: Module):
+            for key, value in module:
+                if isinstance(value, File):
+                    yield value
+                else:
+                    yield from recursive(value)
+        
+        yield from recursive(self)
     
     @cached_property
     def url(self) -> list[str]:

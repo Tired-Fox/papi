@@ -9,7 +9,7 @@
         <Symbol.Class :scope="scope" :name="data.name" />
         {code_highlight(data.code)}
     </div>
-    
+
     <div @if="not blank(data.docstring)" class="docstring">
         <Markdown :src="data.docstring" />
     </div>
